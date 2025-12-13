@@ -38,6 +38,17 @@ public class TaskManager {
         return tasks;
     }
 
+    public void listTasks(List<Task> tasks, TaskStatus status) {
+        if (tasks.isEmpty()) {
+            System.out.println("No tasks found.");
+            return;
+        }
+
+        tasks.stream()
+                .filter(task -> status == null || task.getStatus() == status)
+                .forEach(System.out::println);
+    }
+
     public void saveTask(List<Task> tasks) {
         try {
             String joiner = tasks.stream().map(Task::toJson).collect(Collectors.joining(","));

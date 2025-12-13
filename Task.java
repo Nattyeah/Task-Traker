@@ -24,6 +24,10 @@ public class Task {
         return id;
     }
 
+    public TaskStatus getStatus() {
+        return status;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }

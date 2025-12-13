@@ -16,7 +16,7 @@ This is a simple command-line interface (CLI) application for managing tasks. Yo
 
    ```bash
    git clone https://github.com/Nattyeah/Task-Traker
-   cd Task_Tracker
+   cd Task_Tracker\src
 
 2. **Compile the source code:**
     ```bash

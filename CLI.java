@@ -3,6 +3,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CLI {
+
+    private static final String TASK_NOT_FOUND = "Task not found: ";
+
     public static void main(String[] args) {
         TaskManager taskManager = new TaskManager();
         List<Task> tasks = taskManager.loadTasks();
@@ -29,12 +32,17 @@ public class CLI {
                     break;
 
                 case "list":
-                    if (tasks.isEmpty()) {
-                        System.out.println("No tasks found.");
-                    } else {
-                        System.out.println("Tasks:");
-                        tasks.forEach(System.out::println);
+                    TaskStatus status = null;
+                    if (args.length > 1) {
+                        try {
+                            status = TaskStatus.valueOf(args[1].toUpperCase().replace("-", "_"));
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Invalid status: " + args[1]);
+                            System.out.println("Available statuses: " + Arrays.toString(TaskStatus.values()));
+                            return;
+                        }
                     }
+                    taskManager.listTasks(tasks, status);
                     break;
 
                 case "update":
@@ -49,7 +57,7 @@ public class CLI {
                         taskManager.saveTask(tasks);
                         System.out.println("Task updated successfully: " + updatedId);
                     } else {
-                        System.out.println("Task not found: " + updatedId);
+                        System.out.println(TASK_NOT_FOUND + updatedId);
                     }
                     break;
 
@@ -64,7 +72,7 @@ public class CLI {
                         taskManager.saveTask(tasks);
                         System.out.println("Task status updated successfully: " + idToMarkInProgress);
                     } else {
-                        System.out.println("Task not found: " + idToMarkInProgress);
+                        System.out.println(TASK_NOT_FOUND + idToMarkInProgress);
                     }
                     break;
 
@@ -79,7 +87,7 @@ public class CLI {
                         taskManager.saveTask(tasks);
                         System.out.println("Task status updated successfully: " + idToMarkDone);
                     } else {
-                        System.out.println("Task not found: " + idToMarkDone);
+                        System.out.println(TASK_NOT_FOUND + idToMarkDone);
                     }
                     break;
 
@@ -94,7 +102,7 @@ public class CLI {
                         taskManager.saveTask(tasks);
                         System.out.println("Task deleted successfully: " + idToDelete);
                     } else {
-                        System.out.println("Task not found: " + idToDelete);
+                        System.out.println(TASK_NOT_FOUND + idToDelete);
                     }
                     break;
 
@@ -116,6 +124,7 @@ public class CLI {
         System.out.println("\nCommands:");
         System.out.println("  add <description>      Add a new task");
         System.out.println("  list                   List all tasks");
+        System.out.println("  list <status>          List by status");
         System.out.println("  update <id> <desc>     Update a task's description");
         System.out.println("  mark-in-progress <id>  Update task status to IN_PROGRESS");
         System.out.println("  mark-done <id>         Update task status to DONE");
