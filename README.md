@@ -1,6 +1,6 @@
 # Task Traker Application
 
-This is a simple command-line interface (CLI) application for managing tasks. You can add, update, delete, mark, and list tasks directly from the terminal. Project idea from https://roadmap.sh/projects/task-tracker
+This is a simple command-line interface (CLI) application for managing tasks. You can add, update, delete, mark, and list tasks directly from the terminal.
 
 ## Features
 
@@ -15,7 +15,7 @@ This is a simple command-line interface (CLI) application for managing tasks. Yo
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/Nattyeah/Task-Traker/tree/master
+   git clone https://github.com/Nattyeah/Task-Traker
    cd Task_Tracker\src
 
 2. **Compile the source code:**
